@@ -1,5 +1,10 @@
-function NewNote() {
-  return <h1>NewNote, who dis?</h1>
-}
+import { NoteForm } from "./NoteForm";
 
-export default NewNote;
+export function NewNote() {
+  return (
+    <>
+      <h1 className="mb-4">New Note, Who Dis?</h1>
+      <NoteForm />
+    </>
+  );
+}
