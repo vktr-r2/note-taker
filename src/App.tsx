@@ -6,6 +6,7 @@ import { useLocalStorage } from "./useLocalStorage";
 import { useMemo } from "react";
 import { v4 as uuidV4 } from "uuid";
 
+// Define types for notes and tags
 export type Note = {
   id: string;
 } & NoteData;
@@ -30,10 +31,14 @@ export type Tag = {
   label: string;
 };
 
+// Main App function component
 function App() {
+  
+  // Custom hook to manage notes and tags in local storage
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
   const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
 
+  // useMemo to optimize performance for mapping tags to notes
   const notesWithTags = useMemo(() => {
     return notes.map((note) => {
       return {
@@ -43,6 +48,7 @@ function App() {
     });
   }, [notes, tags]);
 
+  // Function to create a new note
   function onCreateNote({ tags, ...data }: NoteData) {
     setNotes((prevNotes) => {
       return [
@@ -52,10 +58,12 @@ function App() {
     });
   }
 
+  // Function to add a new tag
   function addTag(tag: Tag) {
     setTags((prev) => [...prev, tag]);
   }
 
+  // Render app
   return (
     <Container className="my-4">
       <Routes>
