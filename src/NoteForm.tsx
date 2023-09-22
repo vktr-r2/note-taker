@@ -5,18 +5,24 @@ import CreatableReactSelect from "react-select/creatable";
 import { NoteData, Tag } from "./App";
 import { v4 as uuidV4 } from "uuid";
 
-
+// prop types for NoteForm component
 type NoteFormProps = {
   onSubmit: (data: NoteData) => void
   onAddTag: (tag: Tag) => void
   availableTags: Tag[]
 }
 
+// NoteForm functional component
 export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
+
+  // Init references for title and markdown inputs
   const titleRef = useRef<HTMLInputElement>(null)
   const markdownRef = useRef<HTMLTextAreaElement>(null)
+
+  // Init state for selected tags
   const [selectedTags, setSelectedTags] = useState<Tag[]>([])
 
+  // Handle form submission
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
     onSubmit({
@@ -25,6 +31,8 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
       tags: selectedTags
     })
   }
+  
+  // Define form layout and elements
   return (
     <Form onSubmit={handleSubmit}>
       <Stack gap={4}>
