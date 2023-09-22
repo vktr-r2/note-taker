@@ -1,37 +1,42 @@
 import { FormEvent, useRef, useState } from "react";
 import { Form, Stack, Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreatableReactSelect from "react-select/creatable";
 import { NoteData, Tag } from "../App";
 import { v4 as uuidV4 } from "uuid";
 
 // prop types for NoteForm component
 type NoteFormProps = {
-  onSubmit: (data: NoteData) => void
-  onAddTag: (tag: Tag) => void
-  availableTags: Tag[]
-}
+  onSubmit: (data: NoteData) => void;
+  onAddTag: (tag: Tag) => void;
+  availableTags: Tag[];
+};
 
 // NoteForm functional component
 export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
-
   // Init references for title and markdown inputs
-  const titleRef = useRef<HTMLInputElement>(null)
-  const markdownRef = useRef<HTMLTextAreaElement>(null)
+  const titleRef = useRef<HTMLInputElement>(null);
+  const markdownRef = useRef<HTMLTextAreaElement>(null);
 
   // Init state for selected tags
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([])
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+
+  // Hook to help with navigation
+  const navigate = useNavigate();
 
   // Handle form submission
   function handleSubmit(e: FormEvent) {
-    e.preventDefault()
+    e.preventDefault();
     onSubmit({
       title: titleRef.current!.value,
       markdown: markdownRef.current!.value,
-      tags: selectedTags
-    })
+      tags: selectedTags,
+    });
+    
+    // Navigate back to previous page
+    navigate("..");
   }
-  
+
   // Define form layout and elements
   return (
     <Form onSubmit={handleSubmit}>
@@ -47,36 +52,41 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <CreatableReactSelect
-              onCreateOption={label => {
-                const newTag = {id: uuidV4(), label}
-                onAddTag(newTag)
-                setSelectedTags(prev => [...prev, newTag])
-              }}
-              value={selectedTags.map(tag => {
-                return { label: tag.label, value:tag.id }
-              })}
-              options={availableTags.map(tag => {
-                return {label: tag.label, value: tag.id}
-              })}
-              onChange={tags => {
-                setSelectedTags(
-                  tags.map(tag => {
-                    return {label: tag.label, id: tag.value }
-                  })
-                )
-              }}
-              isMulti />
+                onCreateOption={(label) => {
+                  const newTag = { id: uuidV4(), label };
+                  onAddTag(newTag);
+                  setSelectedTags((prev) => [...prev, newTag]);
+                }}
+                value={selectedTags.map((tag) => {
+                  return { label: tag.label, value: tag.id };
+                })}
+                options={availableTags.map((tag) => {
+                  return { label: tag.label, value: tag.id };
+                })}
+                onChange={(tags) => {
+                  setSelectedTags(
+                    tags.map((tag) => {
+                      return { label: tag.label, id: tag.value };
+                    })
+                  );
+                }}
+                isMulti
+              />
             </Form.Group>
           </Col>
         </Row>
         <Form.Group controlId="markdown">
           <Form.Label>Body</Form.Label>
-          <Form.Control ref={markdownRef} required as="textarea" rows ={15}/>
+          <Form.Control ref={markdownRef} required as="textarea" rows={15} />
         </Form.Group>
         <Stack direction="horizontal" gap={3} className="justify-content-end">
-          <Button type="submit" variant="primary">Save</Button>
+          <Button type="submit" variant="primary">
+            Save
+          </Button>
           <Link to="..">
-            <Button type="button" variant="outline-secondary">Cancel</Button>
+            <Button type="button" variant="outline-secondary">
+              Cancel
+            </Button>
           </Link>
         </Stack>
       </Stack>
