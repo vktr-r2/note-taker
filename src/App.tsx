@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { NoteList } from "./components/NoteList";
 import { NewNote } from "./components/NewNote";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { useMemo } from "react";
@@ -67,7 +68,7 @@ function App() {
   return (
     <Container className="my-4">
       <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
+        <Route path="/" element={<NoteList />} />
         <Route
           path="/new"
           element={
