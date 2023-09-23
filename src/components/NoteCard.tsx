@@ -1,3 +1,5 @@
+import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { Tag } from "../App";
 
 
@@ -9,6 +11,11 @@ export type SimplifiedNote = {
 
 export function NoteCard({id, title, tags}: SimplifiedNote) {
   return (
-    <h4>Note Card here</h4>
-  )
+    <Card as={Link} to={`/${id}`} >
+      <Card.Body>
+        <p>{title}</p>
+      </Card.Body>
+
+    </Card>>
+  )s
 }
