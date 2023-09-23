@@ -3,6 +3,7 @@ import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReactSelect from "react-select";
 import { Tag, Note } from "../App";
+import { NoteCard } from "./NoteCard"
 
 // prop types for NoteList component
 type NoteListProps = {
