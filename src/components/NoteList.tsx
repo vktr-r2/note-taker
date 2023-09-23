@@ -16,6 +16,15 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
 // Init state for selected tags
 const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 
+// Init state for title search form
+const [title, setTitle] = useState("");
+
+const filteredNotes = useMemo(() => {
+  return notes.filter(note => {
+    return (title === "" || note.title.toLowerCase().includes(title.toLowerCase()))
+  })
+}, [title, selectedTags, notes])
+
 return (
     <>
       <Row className="align-items-center mb-4">
