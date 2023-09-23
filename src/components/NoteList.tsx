@@ -1,23 +1,24 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReactSelect from "react-select";
-import { Tag } from "../App";
+import { Tag, Note } from "../App";
 
 // prop types for NoteList component
 type NoteListProps = {
   availableTags: Tag[]
+  notes: Note[]
 }
 
 // NoteList component
-export function NoteList({ availableTags }: NoteListProps) {
+export function NoteList({ availableTags, notes }: NoteListProps) {
 
 // Init state for selected tags
 const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 
-  return (
+return (
     <>
-      <Row>
+      <Row className="align-items-center mb-4">
         <Col>
           <h1> Notes</h1>
         </Col>
@@ -39,7 +40,7 @@ const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
           <Col>
             <Form.Group controlId="title"></Form.Group>
             <Form.Label>Title</Form.Label>
-            <Form.Control type="text" />
+            <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)}/>
           </Col>
           <Col>
           <Form.Group controlId="tags">
@@ -64,6 +65,13 @@ const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
           </Col>
         </Row>
       </Form>
+      <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
+        {filteredNotes.map(note => (
+          <Col key={note.id}>
+            <NoteCard />
+          </Col>
+        ))}
+      </Row>
     </>
   );
 }
