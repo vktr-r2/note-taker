@@ -1,9 +1,15 @@
+import { useState } from "react";
 import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReactSelect from "react-select/creatable";
+import { Tag } from "../App";
 
 // NoteList component
-export function NoteList() {
+export function NoteList({ availableTags }) {
+
+// Init state for selected tags
+const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+
   return (
     <>
       <Row>
