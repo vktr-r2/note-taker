@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ReactSelect from "react-select/creatable";
+import ReactSelect from "react-select";
 import { Tag } from "../App";
 
 // prop types for NoteList component
