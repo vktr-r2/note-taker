@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 import ReactSelect from "react-select/creatable";
 import { Tag } from "../App";
 
+// prop types for NoteList component
+type NoteListProps = {
+  availableTags: Tag[]
+}
+
 // NoteList component
-export function NoteList({ availableTags }) {
+export function NoteList({ availableTags }: NoteListProps) {
 
 // Init state for selected tags
 const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
