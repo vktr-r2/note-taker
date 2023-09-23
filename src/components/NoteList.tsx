@@ -3,30 +3,37 @@ import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReactSelect from "react-select";
 import { Tag, Note } from "../App";
-import { NoteCard } from "./NoteCard"
+import { NoteCard } from "./NoteCard";
 
 // prop types for NoteList component
 type NoteListProps = {
-  availableTags: Tag[]
-  notes: Note[]
-}
+  availableTags: Tag[];
+  notes: Note[];
+};
 
 // NoteList component
 export function NoteList({ availableTags, notes }: NoteListProps) {
+  // Init state for selected tags
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 
-// Init state for selected tags
-const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  // Init state for title search form
+  const [title, setTitle] = useState("");
 
-// Init state for title search form
-const [title, setTitle] = useState("");
+  // filteredNotes useMemo hook to filter NoteCard components on home
+  const filteredNotes = useMemo(() => {
+    return notes.filter((note) => {
+      return (
+        (title === "" ||
+          note.title.toLowerCase().includes(title.toLowerCase())) &&
+        (selectedTags.length === 0 ||
+          selectedTags.every((tag) =>
+            note.tags.some((noteTag) => noteTag.id == tag.id)
+          ))
+      );
+    });
+  }, [title, selectedTags, notes]);
 
-const filteredNotes = useMemo(() => {
-  return notes.filter(note => {
-    return (title === "" || note.title.toLowerCase().includes(title.toLowerCase()))
-  })
-}, [title, selectedTags, notes])
-
-return (
+  return (
     <>
       <Row className="align-items-center mb-4">
         <Col>
@@ -50,10 +57,14 @@ return (
           <Col>
             <Form.Group controlId="title"></Form.Group>
             <Form.Label>Title</Form.Label>
-            <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)}/>
+            <Form.Control
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
           </Col>
           <Col>
-          <Form.Group controlId="tags">
+            <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <ReactSelect
                 value={selectedTags.map((tag) => {
@@ -76,7 +87,7 @@ return (
         </Row>
       </Form>
       <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
-        {filteredNotes.map(note => (
+        {filteredNotes.map((note) => (
           <Col key={note.id}>
             <NoteCard />
           </Col>
