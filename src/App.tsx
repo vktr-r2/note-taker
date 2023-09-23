@@ -34,7 +34,6 @@ export type Tag = {
 
 // Main App function component
 function App() {
-  
   // Custom hook to manage notes and tags in local storage
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
   const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
@@ -68,7 +67,7 @@ function App() {
   return (
     <Container className="my-4">
       <Routes>
-        <Route path="/" element={<NoteList />} />
+        <Route path="/" element={<NoteList availableTags={tags} />} />
         <Route
           path="/new"
           element={
