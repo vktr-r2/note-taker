@@ -1,5 +1,6 @@
-import { Badge, Col, Row, Stack } from "react-bootstrap";
+import { Badge, Button, Col, Row, Stack } from "react-bootstrap";
 import { useNote } from "./NoteLayout";
+import { Link } from "react-router-dom";
 
 export function Note() {
   
@@ -19,6 +20,18 @@ export function Note() {
               ))}
             </Stack>
           )}
+        </Col>
+        <Col xs="auto">
+          <Stack gap={2} direction="horizontal">
+            <Link to="/new">
+              <Button type="button" variant="outline-primary" size="lg">
+                Create
+              </Button>
+            </Link>
+            <Button type="button" variant="outline-secondary" size="lg">
+              Edit Tags
+            </Button>
+          </Stack>
         </Col>
       </Row>
     </>
