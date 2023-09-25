@@ -100,7 +100,7 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
           </Col>
         ))}
       </Row>
-      <EditTagsModal />
+      <EditTagsModal availableTags={availableTags} />
     </>
   );
 }

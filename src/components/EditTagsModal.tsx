@@ -1,6 +1,11 @@
-import { Button, Col, Form, Modal, Row, Stack } from "react-bootstrap"
+import { Button, Col, Form, Modal, Row, Stack } from "react-bootstrap";
+import { Tag } from "../App";
 
-export function EditTagsModal ({ availableTags }) {
+type EditTagsModalProps = {
+  availableTags: Tag[];
+};
+
+export function EditTagsModal({ availableTags }: EditTagsModalProps) {
   return (
     <Modal>
       <Modal.Header closeButton>
@@ -9,20 +14,19 @@ export function EditTagsModal ({ availableTags }) {
       <Modal.Body>
         <Form>
           <Stack gap={2}>
-            {availableTags.map(tag => {
-              <Row key={tag.id}>
-                <Col>
-                </Col>
-                <Col>
-                  <Button variant="outline-danger">
-                    &times;
-                  </Button>
-                </Col>
-              </Row>
+            {availableTags.map((tag) => {
+              return (
+                <Row key={tag.id}>
+                  <Col></Col>
+                  <Col>
+                    <Button variant="outline-danger">&times;</Button>
+                  </Col>
+                </Row>
+              );
             })}
           </Stack>
         </Form>
       </Modal.Body>
     </Modal>
-  )
+  );
 }
