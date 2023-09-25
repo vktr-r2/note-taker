@@ -19,3 +19,8 @@ export function NoteLayout ({ notes }: NoteLayoutProps) {
     <Outlet context={note} />
   )
 }
+
+// Custom hook returns context passed through Outlet
+export function useNote() {
+  return useOutletContext<Note>()
+}
