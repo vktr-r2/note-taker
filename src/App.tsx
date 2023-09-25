@@ -87,6 +87,20 @@ function App() {
     setTags((prev) => [...prev, tag]);
   }
 
+
+// Function to update an existing tag
+function updateTag(id: string, label: string) {
+  setTags((prevTags) => {
+    return prevTags.map((tag) => {
+      if (tag.id === id) {
+        return { ...tag, label };
+      } else {
+        return tag;
+      }
+    });
+  });
+}
+
   // Function to delete an existing tag
   function deleteTag(id: string) {
     setTags(prevTags => {
