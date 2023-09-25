@@ -20,6 +20,9 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
   // Init state for title search form
   const [title, setTitle] = useState("");
 
+  // State to toggle modal view
+  const [editTagsModalView, setEditTagsModalView] = useState(false);
+
   // useMemo to reduce unnecissary renders
   const filteredNotes = useMemo(() => {
     // filter method on 'notes' array to make new array of notes
@@ -53,7 +56,12 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
                 Create
               </Button>
             </Link>
-            <Button type="button" variant="outline-secondary" size="lg">
+            <Button
+              onClick={() => setEditTagsModalView(true)}
+              type="button"
+              variant="outline-secondary"
+              size="lg"
+            >
               Edit Tags
             </Button>
           </Stack>
@@ -96,11 +104,15 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
       <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
         {filteredNotes.map((note) => (
           <Col key={note.id}>
-            <NoteCard id={note.id} title={note.title} tags={note.tags}/>
+            <NoteCard id={note.id} title={note.title} tags={note.tags} />
           </Col>
         ))}
       </Row>
-      <EditTagsModal availableTags={availableTags} />
+      <EditTagsModal
+        show={editTagsModalView}
+        handleClose={() => setEditTagsModalView(false)}
+        availableTags={availableTags}
+      />
     </>
   );
 }
