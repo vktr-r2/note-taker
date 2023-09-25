@@ -5,6 +5,8 @@ type EditTagsModalProps = {
   show: boolean
   handleClose: () => void
   availableTags: Tag[];
+  onDeleteTag: (id: string) => void
+  onUpdateTag: (id: string, label: string) => void
 };
 
 export function EditTagsModal({ availableTags, show, handleClose }: EditTagsModalProps) {

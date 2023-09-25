@@ -10,10 +10,12 @@ import { EditTagsModal } from "./EditTagsModal";
 type NoteListProps = {
   availableTags: Tag[];
   notes: SimplifiedNote[];
+  onDeleteTag: (id: string) => void
+  onUpdateTag: (id: string, label: string) => void
 };
 
 // NoteList component
-export function NoteList({ availableTags, notes }: NoteListProps) {
+export function NoteList({ availableTags, notes, onUpdateTag, onDeleteTag }: NoteListProps) {
   // Init state for selected tags
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 
@@ -112,6 +114,8 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
         show={editTagsModalView}
         handleClose={() => setEditTagsModalView(false)}
         availableTags={availableTags}
+        onDeleteTag={onDeleteTag}
+        onUpdateTag={onUpdateTag}
       />
     </>
   );
