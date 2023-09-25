@@ -32,7 +32,7 @@ export function Note() {
             <Button type="button" variant="outline-danger" size="lg">
               Delete
             </Button>
-            <Link to=".">
+            <Link to="/">
             <Button type="button" variant="outline-secondary" size="lg">
               Back
             </Button>
