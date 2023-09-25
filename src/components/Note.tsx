@@ -13,7 +13,7 @@ export function Note() {
           <h1>{note.title}</h1>
           {note.tags.length > 0 && (
             <Stack gap={1} direction="horizontal" className="flex-wrap">
-              {note.tags.map((tag) => (
+              {note.tags.map(tag => (
                 <Badge className="text-truncates" key={tag.id}>
                   {tag.label}
                 </Badge>
@@ -23,14 +23,19 @@ export function Note() {
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
-            <Link to="/new">
+            <Link to={`/${note.id}/edit`}>
               <Button type="button" variant="outline-primary" size="lg">
-                Create
+                Edit
               </Button>
             </Link>
-            <Button type="button" variant="outline-secondary" size="lg">
-              Edit Tags
+            <Button type="button" variant="outline-danger" size="lg">
+              Delete
             </Button>
+            <Link to=".">
+            <Button type="button" variant="outline-secondary" size="lg">
+              Back
+            </Button>
+            </Link>
           </Stack>
         </Col>
       </Row>
