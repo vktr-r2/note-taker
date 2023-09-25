@@ -10,7 +10,7 @@ type NoteFormProps = {
   onSubmit: (data: NoteData) => void;
   onAddTag: (tag: Tag) => void;
   availableTags: Tag[];
-};
+} & NoteData;
 
 // NoteForm functional component
 export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
@@ -32,7 +32,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
       markdown: markdownRef.current!.value,
       tags: selectedTags,
     });
-    
+
     // Navigate back to previous page
     navigate("..");
   }
