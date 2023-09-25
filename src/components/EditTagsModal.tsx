@@ -2,14 +2,20 @@ import { Button, Col, Form, Modal, Row, Stack } from "react-bootstrap";
 import { Tag } from "../App";
 
 type EditTagsModalProps = {
-  show: boolean
-  handleClose: () => void
+  show: boolean;
+  handleClose: () => void;
   availableTags: Tag[];
-  onDeleteTag: (id: string) => void
-  onUpdateTag: (id: string, label: string) => void
+  onDeleteTag: (id: string) => void;
+  onUpdateTag: (id: string, label: string) => void;
 };
 
-export function EditTagsModal({ availableTags, show, handleClose }: EditTagsModalProps) {
+export function EditTagsModal({
+  availableTags,
+  show,
+  handleClose,
+  onDeleteTag,
+  onUpdateTag,
+}: EditTagsModalProps) {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -21,10 +27,19 @@ export function EditTagsModal({ availableTags, show, handleClose }: EditTagsModa
             {availableTags.map((tag) => (
               <Row key={tag.id}>
                 <Col>
-                  <Form.Control type="text" value={tag.label}/>
+                  <Form.Control
+                    type="text"
+                    value={tag.label}
+                    onChange={(e) => onUpdateTag(tag.id, e.target.value)}
+                  />
                 </Col>
                 <Col xs="auto">
-                  <Button variant="outline-danger">&times;</Button>
+                  <Button
+                    onClick={() => onDeleteTag(tag.id)}
+                    variant="outline-danger"
+                  >
+                    &times;
+                  </Button>
                 </Col>
               </Row>
             ))}
