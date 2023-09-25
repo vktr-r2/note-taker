@@ -87,6 +87,13 @@ function App() {
     setTags((prev) => [...prev, tag]);
   }
 
+  // Function to delete an existing tag
+  function deleteTag(id: string) {
+    setTags(prevTags => {
+      return prevTags.filter(tag => tag.id !== id)
+    })
+  }
+
   // Render app
   return (
     <Container className="my-4">
