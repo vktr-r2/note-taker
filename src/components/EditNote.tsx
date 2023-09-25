@@ -2,7 +2,6 @@ import { NoteData, Tag } from "../App";
 import { NoteForm } from "./NoteForm";
 import { useNote } from "./NoteLayout";
 
-
 // Define prop types
 type EditNoteProps = {
   onSubmit: (id: string, data: NoteData) => void; // Function to handle note submission
@@ -20,6 +19,9 @@ export function EditNote({ onSubmit, onAddTag, availableTags }: EditNoteProps) {
       <h1 className="mb-4">Edit Note, Who Dis?</h1>
       {/* Render NoteForm component, passing in props */}
       <NoteForm
+        title={note.title}
+        markdown={note.markdown}
+        tags={note.tags}
         onSubmit={(data) => onSubmit(note.id, data)}
         onAddTag={onAddTag}
         availableTags={availableTags}
