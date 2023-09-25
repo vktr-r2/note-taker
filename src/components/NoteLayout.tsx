@@ -1,6 +1,11 @@
+import { Note } from "../App"
 
-export function NoteLayout () {
+type NoteLayoutProps = {
+  notes: Note[]
+}
+
+export function NoteLayout ({ notes }: NoteLayoutProps) {
   return (
-    
+
   )
 }
