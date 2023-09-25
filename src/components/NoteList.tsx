@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import ReactSelect from "react-select";
 import { Tag } from "../App";
 import { NoteCard, SimplifiedNote } from "./NoteCard";
+import { EditTagsModal } from "./EditTagsModal";
 
 // prop types for NoteList component
 type NoteListProps = {
@@ -99,6 +100,7 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
           </Col>
         ))}
       </Row>
+      <EditTagsModal />
     </>
   );
 }
